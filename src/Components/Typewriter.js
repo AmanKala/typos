@@ -4,7 +4,7 @@ const Typewriter = ({ text, speed, componentClasses }) => {
     const { displayText, showCursor } = useTypewriter(text, speed);
     return (
         <div className={componentClasses}>
-        <i className="fa fa-keyboard-o"></i> &nbsp;
+        <i className="fa fa-keyboard-o text-warning"></i> &nbsp;
         {displayText}
         {showCursor && '|'} 
         </div>

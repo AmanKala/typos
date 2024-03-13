@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { generateRandomParagraph, renderHighlightedText } from '../Helper/ParagraphGenerator.js';
 
 const Textpad = () => {
-    const [paragraph, setParagraph] = useState('');
+    const [paragraph, setParagraph] = useState(generateRandomParagraph());
     const [typedText, setTypedText] = useState('');
     const [typingStarted, setTypingStarted] = useState(false);
     const [timer, setTimer] = useState(30);
+    const [characherCount, setCharacterCount] = useState(0);
+    const [wordCount, setWordCount] = useState(0);
+    const words = paragraph.split(' ');
 
     useEffect(() => {
-        setParagraph(generateRandomParagraph());
-        // Focus on input when typing starts
         document.getElementById("inputField").focus(); 
     }, []);
 
@@ -23,6 +24,23 @@ const Textpad = () => {
         if(timer===0)
         {
             document.getElementById("inputField").blur();
+            const typedWords = typedText.split(' ');
+            let correctWords = 0, wrong = 0;
+            for (let i = 0; i < typedWords.length; i++) 
+            {
+                if (typedWords[i] === words[i]) {
+                    correctWords++;
+                } 
+                else {
+                    wrong++;
+                }
+            }
+            correctWords+=Math.round(correctWords/10);
+            correctWords*=2;
+            if(wrong){
+                correctWords++;
+            }
+            setWordCount(correctWords);
         }
         
     }, [timer, typingStarted]);
@@ -31,6 +49,15 @@ const Textpad = () => {
         setTypingStarted(true);
         const typed = e.target.value;
         setTypedText(typed);
+
+        let correctCount = 0;
+        for (let i = 0; i < typed.length; i++) 
+        {
+            if (typed[i] === paragraph[i]) {
+                correctCount++;
+            } 
+        }
+        setCharacterCount(correctCount);
     };
 
     const refreshParagraph = () => {
@@ -40,25 +67,26 @@ const Textpad = () => {
         document.getElementById("inputField").focus();
         setTypingStarted(false);
         setTimer(30);
+        setCharacterCount(0);
     };
 
     return ( 
-        <div className='col p-5 m-5'>
+        <div className='col p-5 m-5 heading-font'>
             <div className=' row'>
                 <div className='h4 col text-warning'>
-                    <span className='text-white h5'>{timer!==0 ? 'Timer :': ''} </span>
-                    {timer? timer: 'Time Over!'}
+                    <span className='text-white h5'>{timer!==0 ? 'Timer :': 'Time Over!'} </span>
+                    {timer? timer: ''}
                 </div>
                 <div className='h4 col text-warning text-center'>
-                    {!timer? `WPM`: ''}
+                    {!timer? `${wordCount} WPM`: ''}
                 </div>
-                <div className='h4 col text-warning text-center'>
-                    {!timer? `Characters Clicked`: ''}
+                <div className='h5 col text-white text-center'>
+                    {!timer? `${characherCount} Characters Typed Correctly`: ''}
                 </div>
             </div>
             <p className='p-4 lh-lg shadow h4 rounded text-white bg-secondary'>
-                {renderHighlightedText(paragraph, typedText, typingStarted)}
-            </p>
+                {renderHighlightedText(paragraph, typedText, typingStarted, wordCount, setWordCount, characherCount, setCharacterCount)}
+            </p>    
             <input 
                 id="inputField"
                 type="text" 

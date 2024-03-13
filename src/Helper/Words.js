@@ -1,4 +1,5 @@
 const words = [
+    "a",
     "in",
     "an",
     "the",

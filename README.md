@@ -1,12 +1,12 @@
-# Typos - Typing Practice Application
+# Tyypos - Typing Practice Application
 
-Typos is a React application designed to help users improve their typing speed and accuracy. With Typos, users can practice typing by engaging with random paragraphs and tracking their progress in real-time.
+Tyypos is a React application designed to help users improve their typing speed and accuracy. With Tyypos, users can practice typing by engaging with random paragraphs and tracking their progress in real-time.
 
 ## Features
 
-- **Random Paragraphs:** Typos generates random paragraphs for users to type, ensuring a varied and challenging typing experience.
+- **Random Paragraphs:** Tyypos generates random paragraphs for users to type, ensuring a varied and challenging typing experience.
 - **Typing Speed Measurement:** The application includes a timer to track typing duration, allowing users to monitor their speed as they type.
-- **Accuracy Assessment:** Typos measures typing accuracy by highlighting correct and incorrect characters in the displayed paragraph, providing instant feedback.
+- **Accuracy Assessment:** Tyypos measures typing accuracy by highlighting correct and incorrect characters in the displayed paragraph, providing instant feedback.
 - **Refresh Option:** Users can easily generate a new random paragraph for continued practice by clicking the refresh button.
 
 ## Getting Started
